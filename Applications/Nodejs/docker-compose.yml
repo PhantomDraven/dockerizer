@@ -1,0 +1,17 @@
+version: '3.3'
+
+services:
+    nginx:
+        build:
+            context: ../../nginx
+            args:
+               type: 'nodejs' 
+        ports:
+            - 80:80
+        command: tail -f /dev/null
+    nodejs:
+        build: ../../nodejs
+        volumes:
+            - ./test:/usr/share/nginx/test
+        command: tail -f /dev/null
+        
