@@ -1,11 +1,6 @@
-FROM centos:latest
+FROM centos-default
 
 ARG type
-
-# Creating group www-data
-RUN groupadd -g 1000 www-data
-# Creating user developer
-RUN useradd -G www-data,wheel -u 1001 developer
 
 # installing Nginx
 RUN yum install epel-release -y
@@ -30,9 +25,5 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 # copy localhost config
 COPY localhost.$type.conf /etc/nginx/conf.d/localhost.conf
-
-# set environment variables
-ENV WORKDIR /home/developer
-USER developer
 
 CMD ["bin/bash", "/usr/bin/nginx"]

@@ -1,6 +1,9 @@
 version: '3.3'
 
 services:
+    centos-default: 
+        build:
+            context: ../../centos
     nginx:
         build:
             context: ../../nginx
@@ -9,9 +12,13 @@ services:
         ports:
             - 80:80
         command: tail -f /dev/null
+        depends_on:
+            centos-default
     nodejs:
         build: ../../nodejs
         volumes:
             - ./test:/usr/share/nginx/test
         command: tail -f /dev/null
+        depends_on:
+            centos-default
         
