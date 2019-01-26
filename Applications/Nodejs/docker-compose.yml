@@ -4,6 +4,7 @@ services:
     centos-default: 
         build:
             context: ../../centos
+        image: centos-default
     nginx:
         build:
             context: ../../nginx
@@ -13,12 +14,12 @@ services:
             - 80:80
         command: tail -f /dev/null
         depends_on:
-            centos-default
+            - centos-default
     nodejs:
         build: ../../nodejs
         volumes:
-            - ./test:/usr/share/nginx/test
+            - ./project:/usr/share/nginx/project
         command: tail -f /dev/null
         depends_on:
-            centos-default
+            - centos-default
         
