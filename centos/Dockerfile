@@ -4,6 +4,7 @@ FROM centos:latest
 RUN groupadd -g 1000 www-data
 # Creating user developer
 RUN useradd -G www-data,wheel -u 1001 developer
+RUN usermod -g www-data developer
 
 RUN yum install sudo -y
 
